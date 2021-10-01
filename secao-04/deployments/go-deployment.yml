@@ -1,0 +1,36 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: go-deployment
+  labels: 
+    app: go-deployment
+    type: backend
+
+spec:
+  selector: 
+    matchLabels:
+      app: todo-list-go
+      type: backend
+    
+  template:
+    metadata:
+      name: todo-list-go
+      labels:
+        app: todo-list-go
+        type: backend
+
+    spec:
+      containers:
+        - name: todo-list-go-container
+          image: israelsouza17/todo-list-go
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+              
+
+  replicas: 5
