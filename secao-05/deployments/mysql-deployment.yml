@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: mysql-deployment
+  
+
+spec:
+  selector:
+    matchLabels:
+      app: mysql-db-app
+
+  template:
+    metadata:
+      labels:
+        app: mysql-db-app
+  
+    spec:
+      containers:
+        - name: mysql-db-container
+          image: mysql
+
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "root"
+
+            - name: MYSQL_DATABASE
+              value: "geek42"
+
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+    
+  replicas: 3
